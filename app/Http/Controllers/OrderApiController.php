@@ -35,7 +35,7 @@ class OrderApiController extends Controller
             $order = Order::create([
               "email_asociado" => $request->email,
             ]);
-            
+
             //importante para recorrer arreglos de objetos:
             $a = json_encode($request->products);
             $datos = json_decode($a);

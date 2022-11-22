@@ -48,6 +48,12 @@
                         @else
                             @if (Auth::user()->role_id == 1)
                                 <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('order-products.index') }}">{{ __('Order-Lines') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('orders.index') }}">{{ __('Orders') }}</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="{{ route('user') }}">{{ __('Users') }}</a>
                                 </li>
                                 <li class="nav-item">

@@ -34,7 +34,7 @@ class OrderController extends Controller
         $order = new Order();
         return view('order.create', compact('order'));
     }
- 
+
     /**
      * Store a newly created resource in storage.
      *

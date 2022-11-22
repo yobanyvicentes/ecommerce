@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderProductController;
+use Illuminate\Support\Facades\DB;
 
 
 /**
@@ -30,7 +31,6 @@ class OrderApiController extends Controller
             ]);
 
             $correo = $request->email;
-            $correoid = Order::where('email_asociado', $correo)->max('id');
 
             $order = Order::create([
               "email_asociado" => $request->email,
@@ -39,6 +39,7 @@ class OrderApiController extends Controller
             //importante para recorrer arreglos de objetos:
             $a = json_encode($request->products);
             $datos = json_decode($a);
+            $correoid = Order::where('email_asociado', $correo)->max('id');
 
             foreach($datos as $fila) {
                 $orderproduct = OrderProduct::create([
@@ -55,7 +56,23 @@ class OrderApiController extends Controller
             return response()->json($th, 404);
         }
 
-        return response()->json(['resultado' => 'creación exitosa de la orden', 'order' => $order , 'asignaciones' => $order_product], 200);
+        return response()->json(['resultado' => 'creación exitosa de la orden', 'order' => $order , 'asignaciones' => $orderproduct], 200);
+    }
 
+    public function indexemail($email_asociado){
+        $orders = array();
+        $orders = DB::table('orders')->where('email_asociado', $email_asociado)->pluck('id');
+        $orderprodusts = array();
+        $allorders = array();
+        $allorders[] = $email_asociado;
+
+        foreach ($orders as $order) {
+            $orderprodusts = DB::table('order_products')->where('order_id', $order)->get();
+            foreach ($orderprodusts as $i) {
+                $allorders[] = $i;
+            }
+        }
+
+        return $allorders;
     }
 }

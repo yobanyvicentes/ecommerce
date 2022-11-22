@@ -43,3 +43,8 @@ Route::post('/product', [ProductController::class, 'store'])->name('product.stor
 
 Route::resource('/orders', OrderController::class);
 Route::resource('/order-products', OrderProductController::class);
+
+//Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+//Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+//Route::get('/orders/edit/{id}', [OrderController::class, 'actionEdit'])->name('orders.action.edit');
+//Route::put('/orders/{id}', [OrderController::class, 'edit'])->name('orders.edit');

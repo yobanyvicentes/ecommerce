@@ -29,4 +29,5 @@ Route::post('oauth/token', 'Laravel\Passport\Http\Controllers\AccessTokenControl
 
 Route::get('/ordenes', [OrderApiController::class, 'index']);
 Route::post('/ordenes', [OrderApiController::class, 'store']);
+Route::get('/ordenes/{email_asociado}', [OrderApiController::class, 'indexemail']);
 
